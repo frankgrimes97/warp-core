@@ -31,7 +31,7 @@ public class GuiceTest {
         String name;
     }
 
-    @Test
+    //@Test
     public final void testTypeLiterals() {
         Injector injector = Guice.createInjector(new AbstractModule() {
 
@@ -66,12 +66,12 @@ public class GuiceTest {
 
 
     //just some tests to see how guice behaves
-    @Test
+    //@Test
     public final void testInjectionsWithModule() {
         Injector injector = Guice.createInjector(new AbstractModule() {
 
             protected void configure() {
-                
+
             }
         });
         assert null == injector.getBinding(Key.get(WarpModule.class));

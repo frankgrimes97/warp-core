@@ -21,7 +21,7 @@ public class TextToolsTest {
         };
     }
 
-    @Test(dataProvider = "tokens")
+    //@Test(dataProvider = "tokens")
     public final void testTokenize(String[] rawStream) {
         StringBuilder builder = new StringBuilder();
         for (String chunk : rawStream)

@@ -3,8 +3,8 @@ package com.wideplay.warp.module.pages;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
-import com.google.inject.internal.cglib.proxy.Enhancer;
-import com.google.inject.internal.cglib.proxy.LazyLoader;
+import com.google.inject.internal.cglib.proxy.$Enhancer;
+import com.google.inject.internal.cglib.proxy.$LazyLoader;
 import com.wideplay.warp.module.StateManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,7 +44,7 @@ public class InjectPageProvider<T> implements Provider<T> {
             log.trace(String.format("Obtaining proxied page for @Page: %s", reflection.getPageClass().getSimpleName()));
 
         //create a proxy that knows how to lazy-initialize itself (this any @Page-injected objects do not cascade injection virally)
-        return (T) Enhancer.create(reflection.getPageClass(), new LazyLoader() {
+        return (T) $Enhancer.create(reflection.getPageClass(), new $LazyLoader() {
 
             public Object loadObject() throws Exception {
                 if (log.isTraceEnabled())

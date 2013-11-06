@@ -1,10 +1,10 @@
 package com.wideplay.warp.internal.pages;
 
 import com.google.inject.*;
-import com.google.inject.cglib.proxy.Enhancer;
-import com.google.inject.cglib.proxy.Factory;
-import com.google.inject.cglib.proxy.MethodInterceptor;
-import com.google.inject.cglib.proxy.MethodProxy;
+import com.google.inject.internal.cglib.proxy.$Enhancer;
+import com.google.inject.internal.cglib.proxy.$Factory;
+import com.google.inject.internal.cglib.proxy.$MethodInterceptor;
+import com.google.inject.internal.cglib.proxy.$MethodProxy;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import static org.testng.Assert.assertEquals;
@@ -75,10 +75,10 @@ public class PageClassReflectionBuilderTest {
     @SuppressWarnings("unchecked")
     public void testGuiceClassToProxyProviderBinding() {
         //create proxy for MySuper
-        final Object proxy = Enhancer.create(MySuper.class, new Class[] { PageIdentity.class },
-            new MethodInterceptor() {
+        final Object proxy = $Enhancer.create(MySuper.class, new Class[] { PageIdentity.class },
+            new $MethodInterceptor() {
 
-            public Object intercept(Object object, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+            public Object intercept(Object object, Method method, Object[] args, $MethodProxy methodProxy) throws Throwable {
                 if (PageIdentity.class.getDeclaredMethod(PageIdentity.WARP_PAGE_ID_GETTER).equals(method))
                     return A_PROXY_SOMETHING;
 
@@ -126,10 +126,10 @@ public class PageClassReflectionBuilderTest {
     @SuppressWarnings("unchecked")
     public void testGuiceClassToProxyClassBinding() {
         //create proxy for MySuper
-        Enhancer enhancer = new Enhancer();
+        $Enhancer enhancer = new $Enhancer();
         enhancer.setSuperclass(MySuper.class);
         enhancer.setInterfaces(new Class[] { PageIdentity.class });
-        enhancer.setCallbackType(MethodInterceptor.class);
+        enhancer.setCallbackType($MethodInterceptor.class);
 
         final Class<?> proxyClass = enhancer.createClass();
 
@@ -145,10 +145,10 @@ public class PageClassReflectionBuilderTest {
         String something = mySuper.getSomething();
 
         //modify something:
-        Factory factory = (Factory)mySuper;
-        factory.setCallback(1, new MethodInterceptor() {
+        $Factory factory = ($Factory)mySuper;
+        factory.setCallback(1, new $MethodInterceptor() {
 
-            public Object intercept(Object object, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+            public Object intercept(Object object, Method method, Object[] args, $MethodProxy methodProxy) throws Throwable {
                 if (PageIdentity.class.getDeclaredMethod(PageIdentity.WARP_PAGE_ID_GETTER).equals(method))
                     return A_PROXY_SOMETHING;
 
@@ -181,10 +181,10 @@ public class PageClassReflectionBuilderTest {
 
 
 
-    
+
     public static class MySuper {
         @Inject Arbitrary arbitrary;
-        
+
         public String getSomething() {
             return SOMETHING;
         }

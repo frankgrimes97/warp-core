@@ -21,6 +21,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import javax.servlet.ServletContext;
 import java.io.*;
 import java.lang.annotation.Annotation;
+import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
@@ -165,7 +166,7 @@ class PageHandlerBuilder {
         }
         else
             uris = new String[] { String.format("/%s", template) };
-        
+
         return uris;
     }
 
@@ -179,7 +180,7 @@ class PageHandlerBuilder {
     private ComponentHandler buildComponentHandler(String documentText) {
         return ComponentBuilders.buildComponentHandler(registry, documentText);
     }
-    
+
 
 
 
@@ -236,6 +237,6 @@ class PageHandlerBuilder {
             return IOUtils.toString(asStream);
         else
             //otherwise try on servlet resource path
-            return FileUtils.readFileToString(new File(context.getRealPath(template)), null);
+            return FileUtils.readFileToString(new File(context.getRealPath(template)), (Charset)null);
     }
 }
